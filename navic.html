@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>Navic RP - Officiel Hjemmeside</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #2c0000, #660000, #1a1a1a);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+      color: white;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientFlow {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      background-color: rgba(179, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 24px;
+      color: white;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 10px 15px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffcccc;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr 320px;
+      gap: 30px;
+      padding: 20px;
+      max-width: 1600px;
+      margin: auto;
+    }
+
+    .sidebar, .creators {
+      background-color: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 10px;
+      min-height: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      position: sticky;
+      top: 20px;
+    }
+
+    .sidebar h2,
+    .creators h2 {
+      font-size: 20px;
+      color: #ff4d4d;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ff1a1a;
+      padding-bottom: 5px;
+    }
+
+    .sidebar p,
+    .creators p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      margin-bottom: 30px;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #ff4d4d;
+      border-bottom: 2px solid #ff1a1a;
+      padding-bottom: 5px;
+      text-align: center;
+    }
+
+    p, ul {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+    
+
+.layout.single-column {
+  display: flex;
+  justify-content: center;
+}
+
+/* Scrollbar til politi-boksen */
+.police-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.police-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.police-box::-webkit-scrollbar-thumb {
+  background: #b30000;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.police-box::-webkit-scrollbar-thumb:hover {
+  background: #ff1a1a;
+}
+
+/* Firefox scrollbar (valgfrit – understøtter kun farver) */
+.police-box {
+  scrollbar-width: thin;
+  scrollbar-color: #b30000 rgba(255,255,255,0.05);
+}
+.police-box {
+  background-color: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  position: sticky;
+  top: 110px;
+  right: 50px;
+  left: auto; /* Fjern hvis du tidligere havde 'left' sat */
+  width: 320px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+
+.police-box h2 {
+  font-size: 20px;
+  color: #ff4d4d;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ff1a1a;
+  padding-bottom: 5px;
+}
+
+section.police-info {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  margin-bottom: 30px;
+  grid-column: 2; /* gør at det står i midten som "home" */
+}
+section.police-info.active {
+  display: block;
+}
+
+.server-vision-left {
+  background-color: rgba(0,0,0,0.65);
+  padding: 30px;
+  margin-top: 40px;
+  margin-right: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  max-width: 800px;
+  float: left;
+  clear: both;
+}
+
+.server-vision-left h2 {
+  font-size: 22px;
+  color: #ff4d4d;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ff1a1a;
+  padding-bottom: 5px;
+}
+
+.server-vision-left p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.police-logo {
+  display: none;
+  grid-column: 2; /* midterkolonne */
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.police-logo.active {
+  display: block;
+}
+
+.police-logo img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+}
+
+@media (max-width: 1100px) {
+  .police-box {
+    display: none !important;
+  }
+}
+    .category {
+      background: rgba(42, 42, 42, 0.9);
+      padding: 15px;
+      border-left: 5px solid #e60000;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar, .creators {
+        position: static;
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Navic RP</h1>
+    <nav>
+      <a href="#" onclick="showSection('home')">Hjem</a>
+      <a href="#" onclick="showSection('rules')">Regler</a>
+      <a href="#" onclick="showSection('info')">Information</a>
+      <a href="#" onclick="showSection('police')">Politi</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <!-- VENSTRE SIDE – CHANGELOG -->
+    <div class="sidebar" id="changelog">
+      <h2>Changelog</h2>
+      <p>[20/03/2025] Nyt job tilføjet: Dyrlæge</p>
+      <p>[18/03/2025] Fix: Politibiler opdateret</p>
+      <p>[15/03/2025] Nyt UI til inventory implementeret</p>
+      <p>[12/03/2025] Økonomi script forbedret</p>
+      <p>[10/03/2025] Fængselsmissioner opdateret</p>
+    </div>
+
+    <section id="police-info" class="police-info">
+      <h1>Politi Information</h1>
+      <p style="text-align: center;">Navic RP Politiet er en af byens vigtigste fraktioner og bygger på ansvar, realisme og samarbejde.</p>
+      <div style="max-width: 900px; margin: 0 auto; padding-top: 20px;">
+        <ul style="line-height: 1.8;">
+          <li>Struktureret træning for rekrutter</li>
+          <li>Realistisk patrulje, udrykninger og efterforskning</li>
+          <li>Mulighed for avancement gennem rangsystem</li>
+          <li>Stærkt fællesskab og samarbejde med andre enheder</li>
+        </ul>
+        <p style="margin-top: 20px;">Hvis du ønsker at ansøge til styrken, kontakt en kommissær in-game eller via vores <a href="https://discord.gg/dinserver" target="_blank" style="color: #ff6666;">Discord-server</a>.</p>
+      </div>
+    </section>
+
+    <section id="info" class="content-box">
+      <h1>Information</h1>
+      <p>Server IP: <strong>navicrp.dk:30120</strong></p>
+      <p>Discord: <a href="https://discord.gg/dinserver" target="_blank" style="color:#ff6666;">Klik her for at tilgå Discord</a></p>
+      <p>Navic RP drives af passionerede udviklere og et aktivt RP-community.</p>
+    </section>
+
+    <section id="hvad" class="server-vision">
+      <h2>Hvad står vi for?</h2>
+      <p><strong>Navic RP</strong> er mere end bare en server – det er et fællesskab. Vi er en engageret og passioneret gruppe, som arbejder dedikeret for at skabe den bedst mulige RP-oplevelse for alle vores spillere.</p>
+      <p>Vi bestræber os på at skille os ud fra mængden ved at levere kvalitet, struktur og unikke RP-scenarier. Vores mål er at være en server, hvor alle føler sig hørt, set og respekteret – uanset erfaring eller rolle.</p>
+      <p>Vi lægger stor vægt på <strong>realistisk rollespil</strong>, <strong>aktivt fællesskab</strong> og <strong>retfærdig moderation</strong>. Derfor håndhæver vi vores regler konsekvent og arbejder løbende på at forbedre både systemer, kommunikation og RP-muligheder.</p>
+      <p>Hos os er spillerne i centrum. Vi lytter, vi udvikler, og vi bygger videre på feedback. Vores server er skabt af spillere – for spillere.</p>
+      <p><em>Sammen former vi en verden, der føles levende, troværdig og værd at investere sin tid i.</em></p>
+    </section>
+    
+    <!-- MIDTEN – INDHOLD -->
+    <div class="content">
+      <section id="home" class="active">
+        <h1>Velkommen til Navic RP</h1>
+        <p style="text-align: center;">Live spillerantal: <span id="player-count">Henter...</span></p>
+        <p style="text-align: center;">Navic RP er en dansk FiveM-server, hvor realisme, rolleleg og fællesskab er i fokus.</p>
+      </section>
+
+      <section id="rules" class="content-box">
+        <h1>Server Regler</h1>
+      
+        <h2>Generelle regler / Outgame regler for Navic</h2>
+        <ul>
+          <li>0.1: Det er IKKE tilladt at kontakte staff/admins i privat besked uden aftale – brug Discord support.</li>
+          <li>0.2: Dit allowlist er personligt og må ikke deles.</li>
+          <li>0.3: Toxic/saltet tale frarådes – det skaber dårlig stemning.</li>
+          <li>0.4: Racisme medfører direkte ban.</li>
+          <li>0.5: Du er selv ansvarlig for at holde dig opdateret på regler.</li>
+          <li>0.6: Staff kan vælge at smide spillere ud uden diskussion.</li>
+          <li>0.7: ID-peek er forbudt, medmindre support kræver det.</li>
+          <li>0.8: Brug af 3. parts programmer (Shaders, NoNight m.m.) er forbudt.</li>
+          <li>0.9: Dit Discord-navn skal matche dit ingame-navn.</li>
+          <li>0.9.1: Klip uden egen mikrofon-lyd kan blive afvist.</li>
+        </ul>
+      
+        <h2>Roleplay Regler</h2>
+        <ul>
+          <li>1.0 – Powergaming (f.eks. overmenneskelig adfærd, genoplivning med hovedskud m.m.) er forbudt.</li>
+          <li>1.1 – Metagaming er forbudt.</li>
+          <li>1.2 – Combat-logging er forbudt. 20 min efter skud, 10 min efter RP.</li>
+          <li>1.3 – NewLifeRule gælder altid. Husk intet efter død, medmindre læge (spiller) redder dig.</li>
+          <li>1.4 – FearRP gælder altid – frygt for eget liv.</li>
+          <li>1.5 – Safezones: Midtby garage, hospital, politi, minen, bilforhandler, Burgershot, tøjbutikker.</li>
+          <li>1.5.1 – I Greenzone: kun personvisitation – ikke i køretøj.</li>
+          <li>1.6 – VoldtægtsRP = øjeblikkelig ban.</li>
+          <li>1.7 – Copbaiting er forbudt.</li>
+          <li>1.8 – RDM er forbudt (dræb ikke uden grund).</li>
+          <li>1.9 – VDM er forbudt (kør ikke folk ned).</li>
+          <li>1.10 – Korrupt politi tilladt – men ikke dele våben/bevismateriale.</li>
+          <li>1.11 – Du må ikke tage samme bil ud to gange – bil = unikt objekt.</li>
+          <li>1.12 – PK kræver godkendelse på Discord.</li>
+          <li>1.13 – Homofobiske bemærkninger er forbudt.</li>
+          <li>1.14 – “Så skyd mig” = CK. Klip kræves.</li>
+          <li>1.15 – Selvmord = CK. Klip og support påkrævet.</li>
+          <li>1.16 – Du kan ikke være i bande og politi/mekaniker samtidig.</li>
+          <li>1.17 – BandeFearRP: Frygt bander.</li>
+          <li>1.18 – Kun betjente må bruge/stjæle politiudstyr.</li>
+          <li>1.19 – SexismeRP er forbudt. Giver 48 timers cooldown.</li>
+          <li>1.19.1 – Du må ikke loote betjente – kun body/dashcam.</li>
+          <li>1.19.2 – Brug /me korrekt – ellers FailRP.</li>
+          <li>1.19.3 – Unødvendig våbenbrug = våben fjernet.</li>
+          <li>1.19.4 – Udgiv dig ikke for staff eller politi.</li>
+          <li>1.19.5 – Statsjob må ikke stjæle fra statsbank.</li>
+          <li>1.19.6 – Beredskabskøretøjer må ikke stjæles uden RP-grund.</li>
+        </ul>
+      
+        <h2>Bugs / Snyd / Exploiting</h2>
+        <ul>
+          <li>2.0 – Snyd = øjeblikkelig ban.</li>
+          <li>2.1 – Rapporter bugs. Misbrug = ban.</li>
+          <li>2.2 – AFK farming på drugs = advarsel.</li>
+          <li>2.3 – Er du AFK 10+ min, må du røves – dokumentation kræves.</li>
+        </ul>
+      
+        <h2>Regler for Bander og Grupperinger</h2>
+        <ul>
+          <li>3.0 – Max 16 medlemmer, 10 hangarounds. Overtrædelse = strike.</li>
+          <li>3.1 – Alliancer er tilladt – hold det realistisk.</li>
+          <li>3.2 – Bandeleder må CK/PK medlemmer med grundlag.</li>
+          <li>3.3 – Bandekrig er tilladt – civile skal skånes.</li>
+          <li>3.4 – Marker kan besættes – men alle skal have adgang.</li>
+          <li>3.5 – Bander lukkes ned ved overtrædelse af medlemstal.</li>
+          <li>3.6 – Hele banden dør = opløsning.</li>
+          <li>3.7 – Greenzone regler ophæves kun mellem krigsførende bander.</li>
+          <li>3.8 – Du skal blive 30 min efter skyderi – for RP’s skyld.</li>
+          <li>3.9 – Frygt bander – RP kræves ved konfrontation.</li>
+          <li>3.9.1 – Udgiv dig ikke som anden bande – giver advarsel.</li>
+          <li>3.9.2 – Flytning af lab: max 1 gang pr. uge.</li>
+        </ul>
+      
+        <h2>Regler for Røveri</h2>
+        <ul>
+          <li>4.0 – Brug af biler/cykler er tilladt – vælg RP-venligt.</li>
+          <li>4.1 – Politiet skal have ærlig info om gidsler.</li>
+          <li>4.2 – Planlæg røveriet ordentligt.</li>
+          <li>4.3 – 1 gidsel = 1 krav. Max 2 krav uanset antal gidsler.</li>
+          <li>4.4 – Max 8 til nationalbank, 6 til normale røverier.</li>
+          <li>4.5 – Gidselpris max 100.000 pr. stk.</li>
+          <li>4.6 – Du må ikke kræve fly, våben m.m.</li>
+          <li>4.7 – Nationalbanken kræver pistoler.</li>
+          <li>4.8 – Nationalbanken kræver 3 gidsler.</li>
+          <li>4.9 – Brug ikke venner eller indbyggere som gidsler.</li>
+          <li>4.9.1 – Politiet skal respektere gidslers liv.</li>
+          <li>5.0 – Min. 2 personer til pengetransport-røveri.</li>
+          <li>5.1 – Røv ikke tilfældige uden RP-grundlag.</li>
+          <li>5.1.1 – Scam er forbudt.</li>
+        </ul>
+      
+        <h2>Support og Hjælp</h2>
+        <ul>
+          <li>5.2 – Support sker via Discord ticket – vent på svar.</li>
+          <li>5.3 – Du må ikke kalde på admin ingame.</li>
+          <li>5.4 – Kom hurtigt i support når du bliver kaldt.</li>
+          <li>5.5 – Lav ticket med klip – ikke bare “afventer”.</li>
+          <li>5.6 – Advarsler varer typisk max 1 måned.</li>
+          <li>5.7 – Klip skal have lyd fra mic og spil.</li>
+          <li>5.8 – Klip må max være 48 timer gamle.</li>
+        </ul>
+      
+        <h2>Regler for Arbejde</h2>
+        <ul>
+          <li>6.0 – Pas dit job – ellers log af.</li>
+          <li>6.1 – Køretøjer skal passe til jobbet.</li>
+          <li>6.2 – Giv ikke værktøjer til andre.</li>
+          <li>6.3 – Forstyr ikke politi uden grund.</li>
+          <li>6.4 – Ansøg om jobs via Discord – ikke privatbeskeder.</li>
+          <li>6.5 – Fyret betjent = aflever alt politiudstyr straks.</li>
+        </ul>
+      
+        <h2>Regler for Fly og Helikopter</h2>
+        <ul>
+          <li>7.0 – Fly må kun lande på flyvepladser.</li>
+          <li>7.1 – Helikoptere skal lande realistisk.</li>
+          <li>7.2 – Overtrædelse = beslaglagt af politiet.</li>
+          <li>7.3 – Flyvehøjde skal være realistisk.</li>
+        </ul>
+      </section>
+    
+
+      <section id="police-info" class="police-info">
+        <h1>Politi Information</h1>
+        <p style="text-align: center;">Navic RP Politiet er en af byens vigtigste fraktioner og bygger på ansvar, realisme og samarbejde.</p>
+        <div style="max-width: 900px; margin: 0 auto; padding-top: 20px;">
+          <ul style="line-height: 1.8;">
+            <li>Struktureret træning for rekrutter</li>
+            <li>Realistisk patrulje, udrykninger og efterforskning</li>
+            <li>Mulighed for avancement gennem rangsystem</li>
+            <li>Stærkt fællesskab og samarbejde med andre enheder</li>
+          </ul>
+          <p style="margin-top: 20px;">Hvis du ønsker at ansøge til styrken, kontakt en kommissær in-game eller via vores <a href="https://discord.gg/dinserver" target="_blank" style="color: #ff6666;">Discord-server</a>.</p>
+        </div>
+      </section>
+
+      <div class="police-box" id="police-box" style="display: none;">
+        <h2>Politi – Styrken</h2>
+        <div class="category">
+          <h3>Politi Kommissær</h3>
+          <p>Jens Andersen</p>
+        </div>
+        <div class="category">
+          <h3>Vicekommissær</h3>
+          <p>Mads Pedersen</p>
+        </div>
+        <div class="category">
+          <h3>Betjente</h3>
+          <ul>
+            <li>Peter Jensen</li>
+            <li>Line Sørensen</li>
+            <li>Jonas Nielsen</li>
+            <li>Navn 4</li>
+            <li>Navn 5</li>
+            <li>Navn 6</li>
+            <li>Navn 7</li>
+            <li>Navn 8</li>
+            <li>Navn 9</li>
+            <li>Navn 10</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- HØJRE SIDE – KUN PÅ HJEM -->
+    <div class="creators" id="creators">
+      <h2>Server skabt af</h2>
+      <p><strong>Navic Dev Team</strong></p>
+      <p>– Ulven</p>
+      <p>– Johnni</p>
+      <p>– VB</p>
+      <p>– Agurk</p>
+      <p><em>Tak til alle der har bidraget</em></p>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  const layout = document.querySelector('.layout');
+
+  // Skjul alt først
+  document.getElementById('changelog').style.display = 'none';
+  document.getElementById('creators').style.display = 'none';
+  document.getElementById('police-box').style.display = 'none';
+
+  if (id === 'home') {
+    document.getElementById('changelog').style.display = 'block';
+    document.getElementById('creators').style.display = 'block';
+    document.getElementById('home').classList.add('active');
+    
+    layout.classList.remove('single-column');
+  } else if (id === 'rules') {
+    document.getElementById('rules').classList.add('active');
+    layout.classList.add('single-column');
+  } else if (id === 'info') {
+    document.getElementById('info').classList.add('active');
+    document.getElementById('hvad').classList.add('active');
+    layout.classList.add('single-column');
+  } else if (id === 'police') {
+  document.getElementById('police-info').classList.add('active');
+  document.getElementById('police-box').style.display = 'block';
+  layout.classList.remove('single-column');
+}
+}
+  </script>
+</body>
+</html>
